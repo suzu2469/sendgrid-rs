@@ -358,6 +358,22 @@ impl Personalization {
         }
         self
     }
+
+    pub fn add_substitutions(mut self, substitutions: SGMap) -> Personalization {
+        match self.substitutions {
+            None => {
+                let mut h = HashMap::new();
+                for (name, value) in substitutions {
+                    h.insert(name, value);
+                }
+                self.substitutions = Some(h);
+            }
+            Some(ref mut h) => {
+                h.extend(substitutions);
+            }
+        }
+        self
+    }
 }
 
 impl Attachment {
