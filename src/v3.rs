@@ -345,6 +345,7 @@ impl Personalization {
         self
     }
 
+    /// Add substitutions.
     pub fn add_substitutions(mut self, substitutions: SGMap) -> Personalization {
         match self.substitutions {
             None => {
