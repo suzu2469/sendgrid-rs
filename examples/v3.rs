@@ -3,16 +3,13 @@ use std::collections::HashMap;
 use sendgrid::v3::*;
 
 fn main() {
-    let mut cool_header = HashMap::new();
+    let mut cool_header = HashMap::with_capacity(2);
     cool_header.insert(String::from("x-cool"), String::from("indeed"));
     cool_header.insert(String::from("x-cooler"), String::from("cold"));
 
-    let p = Personalization::new()
-        .add_to(Email::new().set_email("test@example.com"))
-        .add_headers(cool_header);
+    let p = Personalization::new(Email::new("test@example.com")).add_headers(cool_header);
 
-    let m = Message::new()
-        .set_from(Email::new().set_email("g@gmail.com"))
+    let m = Message::new(Email::new("g@gmail.com"))
         .set_subject("Subject")
         .add_content(
             Content::new()
@@ -21,9 +18,8 @@ fn main() {
         )
         .add_personalization(p);
 
-    let mut env_vars = ::std::env::vars();
-    let api_key = env_vars.find(|v| v.0 == "SG_API_KEY").unwrap();
-    let sender = Sender::new(api_key.1);
+    let api_key = ::std::env::var("SG_API_KEY").unwrap();
+    let sender = Sender::new(api_key);
     let code = sender.send(&m);
     println!("{:?}", code);
 }
