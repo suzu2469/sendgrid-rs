@@ -90,6 +90,9 @@ pub struct Personalization {
 
     #[serde(skip_serializing_if = "Option::is_none")]
     send_at: Option<u64>,
+
+    #[serde(skip_serializing_if = "Option::is_none")]
+    send_each_at: Option<Vec<u64>>,
 }
 
 /// The Content-Disposition of the attachment specifying how you would like the attachment to be
