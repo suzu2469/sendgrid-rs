@@ -365,6 +365,18 @@ impl Personalization {
         }
         self
     }
+
+    /// Add send_at
+    pub fn add_sent_at(mut self, send_at: u64) -> Personalization {
+        self.send_at = Some(send_at);
+        self
+    }
+
+    /// Add send_each_at
+    pub fn add_send_each_at(mut self, send_each_at: Vec<u64>) -> Personalization {
+        self.send_each_at = Some(send_each_at);
+        self
+    }
 }
 
 impl Attachment {
