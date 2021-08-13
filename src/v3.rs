@@ -307,6 +307,7 @@ impl Personalization {
             custom_args: None,
             dynamic_template_data: None,
             send_at: None,
+            send_each_at: None,
         }
     }
 
